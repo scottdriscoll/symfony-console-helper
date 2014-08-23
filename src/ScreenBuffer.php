@@ -8,8 +8,6 @@ namespace SD\ConsoleHelper;
 use JMS\DiExtraBundle\Annotation as DI;
 
 /**
- * @DI\Service("console_helper.screen_buffer")
- *
  * @author Richard Bunce <richard.bunce@opensoftdev.com>
  */
 class ScreenBuffer

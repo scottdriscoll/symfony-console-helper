@@ -1,8 +1,7 @@
 {
     "name": "sd/symfony-console-helper",
     "require": {
-        "symfony/console": "*",
-        "jms/di-extra-bundle": "*"
+        "symfony/console": "*"
     },
     "authors": [
         {
