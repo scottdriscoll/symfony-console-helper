@@ -67,19 +67,38 @@ class ScreenBuffer
      * @param int $y
      * @param string $value
      * @param string $color
+     * @param string $backgroundColor
      * @return boolean
      */
-    public function putNextValue($x, $y, $value, $color = null)
+    public function putNextValue($x, $y, $value, $color = null, $backgroundColor = null)
     {
         if ($x < 0 || $x >= $this->width || $y < 0 || $y >= $this->height) {
             return false;
         }
 
-        if (!empty($color)) {
-            $this->screen[$y][$x]->setNext(sprintf('<fg=%s>%s</fg=%s>', $color, $value, $color));
-        } else {
-            $this->screen[$y][$x]->setNext($value);
+        $format = '';
+
+        if ($color) {
+            $format = sprintf('fg=%s', $color);
         }
+
+        if ($color && $backgroundColor) {
+            $format .= ';';
+        }
+
+        if ($backgroundColor) {
+            $format .= sprintf('bg=%s', $backgroundColor);
+        }
+
+        if (!empty($format)) {
+            $formatBegin = sprintf('<%s>', $format);
+            $formatEnd = sprintf('</%s>', $format);
+        } else {
+            $formatBegin = '';
+            $formatEnd = '';
+        }
+
+        $this->screen[$y][$x]->setNext(sprintf('%s%s%s', $formatBegin, $value, $formatEnd));
     }
 
     /**
@@ -87,8 +106,9 @@ class ScreenBuffer
      * @param int $y
      * @param array $values
      * @param string $color
+     * @param string $backgroundColor
      */
-    public function putArrayOfValues($x, $y, array $values, $color = null)
+    public function putArrayOfValues($x, $y, array $values, $color = null, $backgroundColor = null)
     {
         foreach ($values as $yi => $value) {
             if (is_array($value)) {
@@ -96,14 +116,14 @@ class ScreenBuffer
                     if ($x + $xi < 0 || $x + $xi >= $this->width || $y + $yi < 0 || $y + $yi >= $this->height) {
                         continue;
                     }
-                    $this->putNextValue($x + $xi, $y + $yi, $element, $color);
+                    $this->putNextValue($x + $xi, $y + $yi, $element, $color, $backgroundColor);
                 }
             } else {
                 for ($i = 0; $i < strlen($value); $i++) {
                     if ($x + $i < 0 || $x + $i >= $this->width || $y < 0 || $y >= $this->height) {
                         continue;
                     }
-                    $this->putNextValue($x + $i, $y + $yi, $value[$i], $color);
+                    $this->putNextValue($x + $i, $y + $yi, $value[$i], $color, $backgroundColor);
                 }
             }
         }
