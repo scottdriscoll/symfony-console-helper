@@ -5,8 +5,6 @@
 
 namespace SD\ConsoleHelper;
 
-use JMS\DiExtraBundle\Annotation as DI;
-
 /**
  * @author Richard Bunce <richard.bunce@opensoftdev.com>
  */
