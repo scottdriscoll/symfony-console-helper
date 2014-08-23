@@ -1,0 +1,22 @@
+{
+    "name": "sd/symfony-console-helper",
+    "require": {
+        "symfony/console": "*",
+        "jms/di-extra-bundle": "*"
+    },
+    "authors": [
+        {
+            "name": "Scott Driscoll",
+            "email": "scott.driscoll@opensoftdev.com"
+        },
+        {
+            "name": "Richard Bunce",
+            "email": "richard.bunce@opensoftdev.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SD\\ConsoleHelper\\": "src/"
+        }
+    }
+}
