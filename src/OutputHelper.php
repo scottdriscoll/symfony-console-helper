@@ -104,4 +104,4 @@ class OutputHelper
     }
 }
 
-register_shutdown_function('\SD\InvadersBundle\Helpers\OutputHelper::showCursor');
+register_shutdown_function('\SD\ConsoleHelper\OutputHelper::showCursor');
